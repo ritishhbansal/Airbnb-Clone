@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= pageTitle %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* ===== PAGE HEADER ===== */
+.header {
+  max-width: 1280px;
+  margin: 32px auto 20px;
+  padding: 0 24px;
+}
+
+/* NAVBAR WRAPPER */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: #ffffff;
+  border-bottom: 1px solid #ebebeb;
+}
+
+/* NAV LIST */
+nav ul {
+  max-width: 1280px;
+  margin: auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 22px;
+}
+
+/* LOGO */
+.logo {
+  width: 36px;
+  height: 36px;
+  background: #ff385c;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* LEFT MENU LINKS */
+nav a {
+  text-decoration: none;
+  color: #222;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+nav a:hover {
+  background: #f7f7f7;
+}
+
+/* PUSH AUTH TO RIGHT */
+.auth {
+  margin-left: auto;
+}
+
+/* LOGOUT BUTTON */
+.logout {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.logout:hover {
+  background: #f7f7f7;
+}
+
+/* LOGIN BUTTON (Airbnb style pill) */
+nav a[href="/login"] {
+  border: 1px solid #dddddd;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  nav ul {
+    padding: 12px 16px;
+    gap: 14px;
+  }
+
+  nav a {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}
+
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.log {
+  background: #ff385c;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+/* ===== GRID ===== */
+.container {
+  max-width: 1280px;
+  margin: auto;
+  padding: 12px 24px 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+/* ===== CARD ===== */
+.card {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* IMAGE */
+.media {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* BODY */
+.card-body {
+  padding: 10px 4px;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.houseName {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+}
+
+.location {
+  font-size: 13px;
+  color: #717171;
+  margin-top: 2px;
+}
+
+.price {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.rating {
+  font-size: 13px;
+}
+
+/* INFO ROW */
+.card-body > div:nth-child(2) {
+  margin-top: 6px;
+}
+
+/* ===== ACTIONS ===== */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* BOOK BUTTON */
+.btn.book {
+  background: #ff385c;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn.book:hover {
+  opacity: 0.9;
+}
+
+/* DELETE (TRASH ICON) */
+.fav {
+  background: white;
+  border: 1px solid #dddddd;
+  border-radius: 50%;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.fav:hover {
+  background: #f7f7f7;
+  transform: scale(1.05);
+}
+
+/* DETAILS */
+.details {
+  font-size: 13px;
+  color: #222;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  .media {
+    height: 210px;
+  }
+
+  .brand h1 {
+    font-size: 22px;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <main>
+      <div class="header">
+        <div class="brand">
+          <div class="log">WELCOME</div>
+          <div>
+            <h1>Favourites</h1>
+            <div style="font-size:13px;color:var(--muted)">Beautiful homes</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <% favouriteHomes.forEach(home => { %>
+          <article class="card">
+            <img class="media" src="<%= home.photo %>" alt="<%= home.houseName %> photo" />
+            <div class="card-body">
+              <div class="title-row">
+                <div>
+                  <h2 class="houseName"><%= home.houseName %></h2>
+                  <p class="location"><i aria-hidden="true"></i> <%= home.location %></p>
+                </div>
+                <div style="text-align:right">
+                  <div class="price">Rs <%= home.price %> / night</div>
+                  <div style="margin-top:6px"><span class="rating">★ <%= home.rating %></span></div>
+                </div>
+              </div>
+
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px">
+                <div style="font-size:13px;color:var(--muted)">Instant Booking • Free cancellation</div>
+                <div style="font-size:12px;color:var(--muted)">Host rating 4.8</div>
+              </div>
+
+              <div class="actions">
+                <form action="/book/<%= home._id %>" method="POST" style="flex:1">
+                  <button type="submit" class="btn book">Book</button>
+                </form>
+
+                <form action="/host/fav-delete-home/<%=home._id %>" method="POST">
+              <button type="submit" class="fav" class="delete">🗑</button>
+            </form>
+
+                <a class="details" href="/homes/<%= home._id %>">Details</a>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+
+    </main>
+  </body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favourites</title>
+  <link rel="stylesheet" href="home.css"/>
+  <style>
+    .delete {
+  text-decoration: none;
+  position: absolute;
+  right: 40px;
+  bottom: 75px;
+  padding: 0.2px 4px;
+  cursor: pointer;
+  border:1px solid #95DAEE;
+  border-radius: 0.5rem;
+  transition:all 0.3s ease-in-out;
+}
+.delete:hover {
+  transform:scale(2.02);
+}
+.details{
+  text-decoration: none;
+      border:none;
+      background-color: white;
+    }
+.details{
+      color:black;
+    }
+.details:hover{
+      color:blue;
+    }
+  </style>
+</head>
+  <body>
+    <%- include('../partials/nav') %>
+    <main>
+      <h2>
+        Here are your favourites:
+      </h2>
+      <div class="container">
+        <% favouriteHomes.forEach(home => { %>
+          <div class="info">
+           <image class="image" src="<%= home.photo %>"></image>
+              <h3><%= home.houseName %></h3>
+              <p><i></i><%= home.location %></p>
+                <span>Rs<%= home.price %>/night</span><br>
+                  <span >★</span><span><%= home.rating %></span><br>
+                  <form action="/host/fav-delete-home/<%=home._id %>" method="POST">
+              <button type="submit" class="delete">🗑</button></form>
+              <button class="book">Book</button>
+              <a class=details href="/details/<%= home._id %>">Details...</a>
+          </div>
+        <% }) %>
+      </div>
+    </main>
+  </body>
+</html> -->

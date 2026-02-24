@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/home.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <main>
+      <div class="header">
+        <div class="brand">
+          <div class="log">WELCOME</div>
+          <div>
+            <h1>Discover warm stays</h1>
+            <div style="font-size:13px;color:var(--muted)">Beautiful homes</div>
+          </div>
+        </div>
+        <div class="tag">Popular</div>
+      </div>
+
+      <div class="container">
+        <% registeredHomes.forEach(home => { %>
+          <article class="card">
+            <img class="media" src="<%= home.photo %>" alt="<%= home.houseName %> photo" />
+            <div class="card-body">
+              <div class="title-row">
+                <div>
+                  <h2 class="houseName"><%= home.houseName %></h2>
+                  <p class="location"><i aria-hidden="true"></i> <%= home.location %></p>
+                </div>
+                <div style="text-align:right">
+                  <div class="price">Rs <%= home.price %> / night</div>
+                  <div style="margin-top:6px"><span class="rating">★ <%= home.rating %></span></div>
+                </div>
+              </div>
+
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px">
+                <div style="font-size:13px;color:var(--muted)">Instant Booking • Free cancellation</div>
+                <div style="font-size:12px;color:var(--muted)">Host rating 4.8</div>
+              </div>
+
+              <div class="actions">
+                <form action="/books/<%= home._id %>" method="POST" style="flex:1">
+                  <button type="submit" class="btn book">Book</button>
+                </form>
+
+                <form action="/fav/<%=home._id%>" method="POST">
+                  <button aria-label="Add to favourites" class="fav" type="submit">😍</button>
+                </form>
+
+                <a class="details" href="/homes/<%= home._id %>">Details</a>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+
+    </main>
+  </body>
+</html>
+
+
+
+
+
+
+
+<!-- <%- include('../partials/head') %>
+<style>
+.details{
+  text-decoration: none;
+      border:none;
+      background-color: white;
+    }
+.details{
+      color:black;
+    }
+.details:hover{
+      color:blue;
+    }
+
+</style>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <main>
+       <div class="container">
+        <% registeredHomes.forEach(home => { %>
+          <div class="info">
+           <image class="image" src="<%= home.photo %>"></image>
+              <h3><%= home.houseName %></h3>
+              <p><i></i><%= home.location %></p>
+                <span>Rs<%= home.price %>/night</span><br>
+                  <span >★</span><span><%= home.rating %></span><br>
+              <form action="/fav/<%=home._id%>" method="POST">
+                <button class="favourite" value="submit">😍</button>
+              </form>
+              <form action="/book/<%= home._id %>" method="POST">
+              <button class="book">Book</button>
+              <a class=details href="/homes/<%= home._id %>">Details...</a>
+          </div>
+        <% }) %>
+      </div>
+    </main>
+  </body>
+</html> -->

@@ -1,0 +1,37 @@
+<%- include('../partials/head') %>
+<style>
+.details{
+  text-decoration: none;
+      border:none;
+      background-color: white;
+    }
+.details{
+      color:black;
+    }
+.details:hover{
+      color:blue;
+    }
+</style>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <main>
+      <h2>
+        Here are our registered homes:
+      </h2>
+       <div class="container">
+        <% registeredHomes.forEach(home => { %>
+          <div class="info">
+           <image class="image" src="https://besthotelshome.com/wp-content/uploads/2020/03/Best-Luxury-hotels-in-New-Delhi.jpg"></image>
+              <h3><%= home.houseName %></h3>
+              <p><i></i><%= home.location %></p>
+                <span>Rs<%= home.price %>/night</span><br>
+                  <span >★</span><span><%= home.rating %></span><br>
+              <button class="book">Book</button>
+              <a class=details href="/homes/<%= home._id %>">Details...</a>
+          </div>
+        <% }) %>
+      </div>
+    </main>
+  </body>
+</html>

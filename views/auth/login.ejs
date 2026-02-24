@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="/login.css"> 
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <div class="wrap">
+      <main class="card" role="main" aria-labelledby="signin-title">
+
+        <h2 id="signin-title">Welcome back</h2>
+
+        <form action="/login" method="POST" class="add" novalidate>
+
+          <% if (errors && errors.length > 0) { %>
+            <div class="err" role="alert">
+              <strong>Uh‑oh —</strong>
+              <ul>
+                <% errors.forEach(error => { %>
+                  <li><%= error %></li>
+                <% }) %>
+              </ul>
+            </div>
+          <% } %>
+
+          <div class="field">
+            <label class="small" for="email">Email</label>
+            <input class="input" id="email" type="email" name="email" placeholder="you@example.com" value="<%= oldInput && oldInput.email ? oldInput.email : '' %>" required />
+          </div>
+
+          <div class="field">
+            <label class="small" for="password">Password</label>
+            <input class="input" id="password" type="password" name="password" placeholder="Enter your password" required />
+            <button type="button" class="toggle" id="togglePwd" aria-label="Show password">Show</button>
+          </div>
+
+          <div class="row">
+
+            <a href="/signup" class="register">Need an account?</a>
+          </div>
+
+          <input class="input" id="login" type="submit" value="Sign In" />
+
+          <p class="helper">By signing in you agree to our <a href="#" style="color:var(--taupe);text-decoration:underline;">Terms</a> and <a href="#" style="color:var(--taupe);text-decoration:underline;">Privacy</a>.</p>
+
+        </form>
+      </main>
+    </div>
+
+    <script>
+      // Show / hide password (accessible)
+      (function(){
+        const pwd = document.getElementById('password');
+        const btn = document.getElementById('togglePwd');
+        if(!pwd || !btn) return;
+        btn.addEventListener('click', ()=>{
+          if(pwd.type === 'password'){
+            pwd.type = 'text';
+            btn.textContent = 'Hide';
+            btn.setAttribute('aria-pressed','true');
+          } else {
+            pwd.type = 'password';
+            btn.textContent = 'Show';
+            btn.setAttribute('aria-pressed','false');
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
